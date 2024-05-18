@@ -1,0 +1,21 @@
+vlog *.v
+vsim -voptargs=+acc work.vectoring_cordic
+do {F:/Aloshka/Graduation Project/Digital/CFR/RTL/cordic/wave_vector.do}
+#add wave -position insertpoint sim:/vectoring_cordic/*
+#add wave -position insertpoint sim:/vectoring_cordic/LUT1/*
+#add wave -position insertpoint  \
+#sim:/vectoring_cordic/LUT1/MEM
+force -freeze sim:/vectoring_cordic/clk 1 0, 0 {50 ns} -r 100
+force -freeze sim:/vectoring_cordic/rst_n 0 0
+force -freeze sim:/vectoring_cordic/enable 0 0
+force -freeze sim:/vectoring_cordic/real_in 4cd 0
+force -freeze sim:/vectoring_cordic/imag_in fffff99a 0
+run
+run
+force -freeze sim:/vectoring_cordic/rst_n 1 0
+force -freeze sim:/vectoring_cordic/enable 1 0
+run
+run
+run
+run
+run
